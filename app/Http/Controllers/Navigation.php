@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Navigation extends Controller
 {
@@ -21,7 +22,8 @@ class Navigation extends Controller
     }
 
     public function class(){
-        return view('class');
+        $class = DB::table('classses')->get();
+        return view('class',compact('class'));
     }
 
     public function teacher(){

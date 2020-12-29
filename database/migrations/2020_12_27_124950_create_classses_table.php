@@ -14,13 +14,13 @@ class CreateClasssesTable extends Migration
     public function up()
     {
         Schema::create('classses', function (Blueprint $table) {
-            $table->string('class_id');
+            $table->id();
             $table->string('class_name');
             $table->integer('class_year');
             $table->string('class_teacher');
             $table->string('class_type');
             
-            $table->primary('class_id');
+          
 
             $table->timestamps();
         });

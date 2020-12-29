@@ -12,10 +12,18 @@ class ConDatabase extends Controller
 
     public function addclass(Request $req)
     {
-        $cnt = count(DB::table('classses')->get());
+        $req->validate([
+            'CName'=>'required',
+
+        ],[
+            'CName.required'=>'Class is must'
+        
+        ]);
+        
+      
         
         $cls = new classses;
-        $cls->class_id = "CLS".($cnt+1);
+       
         $cls->class_name = $req->CName;
         $cls->class_year = $req->CYear;
         $cls->class_teacher = $req->CTName;
@@ -30,6 +38,27 @@ class ConDatabase extends Controller
         $cs = DB::table('classs')->get();
 
         return view('viewclass',compact('cs'));
+    }
+
+    public function editclass(Request $req)
+    {
+       DB::table('classses')->where('id',$req->eid)->update([
+           'class_name'=>$req->ename,
+           'class_year'=>$req->eyear,
+           'class_teacher'=>$req->eteacher,
+           'class_type' => $req->etype
+    
+       ]);
+
+        
+        
+    }
+
+    public function delete($i){
+        DB::table('classses')->where('id',$i)->delete();
+
+        return redirect()->back()->with('msg',"class is Deleted");
+
     }
 
 }

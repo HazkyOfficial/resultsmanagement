@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
     <script src="{{ asset('js/propper.min.js')}}"></script>
     <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <title>Class Page</title>
 </head>
 <body>
@@ -54,7 +55,31 @@
           </div>
         </div>
       </nav>
+@if($errors->any())
+<ul>
+  @foreach($errors->all() as $er)
+  
+  <li>{{$er}}</li>
+  
 
+  @endforeach
+  </ul>
+@endif
+
+
+<script src="{{ asset('js/sweetalert2.all.min.js')}}"></script>
+@if($msg=session()->get('msg'))
+
+<script>
+  Swal.fire({
+  position: 'top'
+  text: '{{$msg}}',
+  icon: 'success',
+  confirmButton: false,
+  timer: 1500
+})
+</script>
+@endif
     <!-- Model part -->
     <!-- Add Modal -->
     <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -111,15 +136,17 @@
             </div>
             <div class="modal-body">
             
-                <form>
+                <form action = "editclass" method = "post">
+                @csrf
                     <div class="mb-3">
+                      <input type="text" id = "eid" name = "eid" readonly> <br>
                       <label for="exampleInputEmail1" class="form-label">Class Name:</label>
-                      <input type="text" class="form-control" id="" value="CName" placeholder="Enter class name">
+                      <input type="text" class="form-control" id="ename" name = "ename" placeholder="Enter class name">
                     </div>
                     
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Class Type:</label>
-                        <select class="form-select form-select mb-3">
+                        <select id = 'etype' name="etype" class="form-select form-select mb-3">
                             <option selected>(select one option)</option>
                             <option value="GCE-A/L">GCE Advanced Level</option>
                             <option value="GCE-O/L">GCE Ordinary Level</option>
@@ -129,24 +156,40 @@
                     </div>  
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Class Year:</label>
-                        <input type="text" class="form-control" id="" value="CYear" placeholder="Enter class name">
+                        <input type="text" class="form-control" id="eyear" name="eyear" placeholder="Enter class name">
                     </div>  
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Class Teacher Name:</label>
-                        <input type="text" class="form-control" id="" type="CTName" placeholder="Enter class teacher name">
-                    </div>  
+                        <input type="text" class="form-control" id="eteacher" name="eteacher"  placeholder="Enter class teacher name">
+                    </div>   
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>
 
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+           
             </div>
         </div>
         </div>
     </div>
+<script>
+  function edit(i){
+    var id = document.getElementById('id'+i).value;
+    var name = document.getElementById('name'+i).value;
+    var type = document.getElementById('type'+i).value;
+    var year = document.getElementById('year'+i).value;
+    var teacher = document.getElementById('teacher'+i).value;
 
+    document.getElementById('eid').value = id;
+    document.getElementById('ename').value = name;
+    document.getElementById('etype').value = type;
+    document.getElementById('eyear').value = year;
+    document.getElementById('eteacher').value = teacher;
+  }
+
+</script>
     <!-- Table Part -->
     <div class="card">
         <p class="card-header"><b> Menu / Class</b></p>
@@ -177,18 +220,28 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <?php $k = 0; ?>
+                    @foreach($class as $cls)
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                      
+                        <td>{{$cls->id}}</td>
+                        <td>{{$cls->class_name}}</td>
+                        <td>{{$cls->class_type}}</td>
+                        <td>{{$cls->class_year}}</td>
+                        <td>{{$cls->class_teacher}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
+                          <input type="hidden" id = "id<?php echo $k; ?>" value= "{{$cls->id}}">
+                          <input type="hidden" id = "name<?php echo $k; ?>" value= "{{$cls->class_name}}">
+                          <input type="hidden" id = "type<?php echo $k; ?>" value= "{{$cls->class_type}}">
+                          <input type="hidden" id = "year<?php echo $k; ?>" value= "{{$cls->class_year}}">
+                          <input type="hidden" id = "teacher<?php echo $k; ?>" value= "{{$cls->class_teacher}}">
+                            <a  href="{{route('delete',$cls->id)}}" class="btn btn-danger btn-sm">Delete</a>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick = "edit(<?php echo $k; ?>)" data-bs-target="#edit">Edit</button>
                             
                         </td>
                       </tr>
+                      <?php $k++; ?>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
