@@ -87,7 +87,6 @@
                         <label for="exampleInputEmail1" class="form-label">Class Year:</label>
                         <input type="text" class="form-control" id="" name="CYear" placeholder="Enter class year">
                     </div>  
-
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Class Teacher Name:</label>
                         <input type="text" class="form-control" id="" name="CTName" placeholder="Enter class teacher name">
@@ -97,9 +96,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                     </div> 
-                </form>
-
-            
+                </form>    
         </div>
         </div>
     </div>

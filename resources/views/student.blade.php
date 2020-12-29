@@ -57,7 +57,51 @@
         </div>
       </nav>
 
-
+    <!-- Model part -->
+    <!-- Add Modal -->
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create New Class</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            
+                <form action="/addclass" method="post">
+                @csrf
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Class Name:</label>
+                      <input type="text" class="form-control" id="" name="CName" placeholder="Enter class name">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Class Type:</label>
+                        <select class="form-select form-select mb-3" name="CType">
+                            <option selected>(select one option)</option>
+                            <option value="GCE-A/L">GCE Advanced Level</option>
+                            <option value="GCE-O/L">GCE Ordinary Level</option>
+                            <option value="SecondaryLevel">Secondary Level</option>
+                            <option value="PrimaryLevel">Primary Level</option>
+                        </select>
+                    </div>  
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Class Year:</label>
+                        <input type="text" class="form-control" id="" name="CYear" placeholder="Enter class year">
+                    </div>  
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Class Teacher Name:</label>
+                        <input type="text" class="form-control" id="" name="CTName" placeholder="Enter class teacher name">
+                    </div> 
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div> 
+                </form>    
+        </div>
+        </div>
+    </div>
 
     <!-- Table Part -->
     <div class="card">
@@ -70,8 +114,39 @@
                 <div class="card-body">
                   <h5 class="card-title">All class details..</h5>
 
-                  <p>Students Copmponents</p>
-
+                  <div class="row">
+                        <div class="col-md-12 text-end">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add">Add</button>
+                        </div>
+                    </div>
+                    <br>
+                  <!-- table -->
+                  <table class="table table-dark table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Index No</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Date of birth</th>
+                        <th scope="col">Contact No</th>
+                        <th style="width:  12%">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
+                            
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
             </div>
           </div>
