@@ -35,6 +35,3 @@ Route::get('/contact',[Navigation::class, 'contact']);
 Route::post('addclass',[ConDatabase::class,'addclass']);
 Route::post('editclass',[ConDatabase::class,'editclass']);
 Route::get('delete/{c}',[ConDatabase::class,'delete'])->name('delete');
-Route::get('adstudent/{c}',[ConDatabase::class,'delete'])->name('delete');
-
-
