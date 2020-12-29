@@ -68,30 +68,43 @@
             </div>
             <div class="modal-body">
             
-                <form action="/addclass" method="post">
+                <form action="/addstudent" method="post">
                 @csrf
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Class Name:</label>
-                      <input type="text" class="form-control" id="" name="CName" placeholder="Enter class name">
+                      <label for="exampleInputEmail1" class="form-label">Index Number:</label>
+                      <input type="text" class="form-control" id="" name="CName" placeholder="Enter index number">
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Full Name:</label>
+                      <input type="text" class="form-control" id="" name="CName" placeholder="Enter full name">
                     </div>
                     
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Class Type:</label>
-                        <select class="form-select form-select mb-3" name="CType">
-                            <option selected>(select one option)</option>
-                            <option value="GCE-A/L">GCE Advanced Level</option>
-                            <option value="GCE-O/L">GCE Ordinary Level</option>
-                            <option value="SecondaryLevel">Secondary Level</option>
-                            <option value="PrimaryLevel">Primary Level</option>
-                        </select>
+                        <label for="exampleInputEmail1" class="form-label">Gender:</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                          <label class="form-check-label" for="flexRadioDefault1">
+                            Male
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+                          <label class="form-check-label" for="flexRadioDefault2">
+                            Female
+                          </label>
+                        </div>
                     </div>  
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Class Year:</label>
-                        <input type="text" class="form-control" id="" name="CYear" placeholder="Enter class year">
-                    </div>  
+                        <label for="exampleInputEmail1" class="form-label">Date of birth:</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
+                        <input data-datepicker="" class="form-control" id="birthday" type="text" placeholder="dd/mm/yyyy" required>
+                    </div>
+                      </div>  
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Class Teacher Name:</label>
-                        <input type="text" class="form-control" id="" name="CTName" placeholder="Enter class teacher name">
+                        <label for="exampleInputEmail1" class="form-label">Class Name:</label>
+                        <input type="text" class="form-control" id="" name="CTName" placeholder="Enter class name">
                     </div> 
                     </div>
                     <div class="modal-footer">
@@ -128,7 +141,7 @@
                         <th scope="col">Full Name</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Date of birth</th>
-                        <th scope="col">Contact No</th>
+                        <th scope="col">Class Name</th>
                         <th style="width:  12%">Action</th>
                       </tr>
                     </thead>
